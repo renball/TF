@@ -18,13 +18,15 @@ TMem TNode::mem;
 
 int main()
 {
+	setlocale(LC_ALL, "russian");
+
 	TNode::InitMem(100);
 
 	TText tx;
 
 	tx.Load("..\\input.txt");
 	tx.GoFirstLine();
-
+	
 	char control;
 
 	do {
@@ -86,22 +88,18 @@ int main()
 		clrscr();
 	} while (control != ESC);
 
-	cout << "-----------------------------------------\n";
-	cout << "Free memory :\n";
+	cout << "Свободная память:\n";
 	TNode::PrintFreeNodes();
 	cout << '\n';
-	cout << "-----------------------------------------\n";
 	tx.CleanMem();
 
-	cout << "Free memory after garbage collection :\n";
+	cout << "Свободная память после сборки мусора:\n";
 	TNode::PrintFreeNodes();
-	cout << "-----------------------------------------\n";
-	cout << "-----------------------------------------\n";
-	cout << "\nCopy test:\n";
-	
-	TText* ctx = tx.GetCopy();
-	cout << "Original text: \n";
+
+	cout << "Оригинал: \n";
 	tx.Print();
-	cout << "\nCopyed text: \n";
-	ctx->Print();
+	cout << "\nКопия: \n";
+
+	TText* copytext = tx.GetCopy();
+	copytext->Print();
 }
